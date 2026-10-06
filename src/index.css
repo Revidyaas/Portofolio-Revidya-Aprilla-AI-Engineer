@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-main: #E9EDF3;
+    --surface-main: #E9EDF3;
+    --shadow-dark: #c9d3e0;
+    --shadow-light: #ffffff;
+    --accent-blue: #2563EB;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Neomorphic Utilities (Soft UI) */
+.neo-surface {
+  background-color: var(--surface-main);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.neo-raised {
+  background-color: var(--surface-main);
+  box-shadow: 7px 7px 16px var(--shadow-dark), -7px -7px 16px var(--shadow-light);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.neo-raised-sm {
+  background-color: var(--surface-main);
+  box-shadow: 3px 3px 8px var(--shadow-dark), -3px -3px 8px var(--shadow-light);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.neo-raised-lg {
+  background-color: var(--surface-main);
+  box-shadow: 12px 12px 24px var(--shadow-dark), -12px -12px 24px var(--shadow-light);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.neo-inset {
+  background-color: var(--surface-main);
+  box-shadow: inset 3px 3px 7px var(--shadow-dark), inset -3px -3px 7px var(--shadow-light);
+  border: 1px solid rgba(200, 210, 225, 0.25);
+}
+
+.neo-btn {
+  background-color: var(--surface-main);
+  box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+.neo-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
+}
+.neo-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light);
+}
+
+.neo-btn-primary {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  box-shadow: 4px 4px 12px rgba(37, 99, 235, 0.3), -4px -4px 10px var(--shadow-light);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.neo-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 6px 6px 16px rgba(37, 99, 235, 0.4), -6px -6px 14px var(--shadow-light);
+}
+.neo-btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.6);
+}
