@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - master
   workflow_dispatch:
 
 jobs:
@@ -14,21 +13,21 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Build Website
+      - name: Build Application
         run: npm run build
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT || secrets.FIREBASE_SERVICE_ACCOUNT_REVIDYA_PORTFOLIO }}
           channelId: live
-          projectId: revidya-portfolio
