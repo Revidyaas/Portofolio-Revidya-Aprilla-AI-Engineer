@@ -4,46 +4,66 @@ Website portofolio profesional untuk **Revidya Aprilla Sandiva** (AI Engineer & 
 
 ---
 
-## 🚀 Panduan Hosting ke GitHub Pages
+## 🔥 Panduan Deploy ke Firebase Hosting
 
-Proyek ini telah dikonfigurasi secara otomatis untuk **GitHub Pages** menggunakan **GitHub Actions** (`.github/workflows/deploy.yml`) dan base path relatif (`./`) sehingga dapat berjalan langsung baik di root domain maupun subdirektori repositori.
+Proyek ini telah dikonfigurasi secara lengkap untuk **Firebase Hosting** dengan dukungan Single Page Application (SPA rewrites), caching aset statis, dan `base: '/'`.
 
-### Langkah 1: Buat Repositori Baru di GitHub
-1. Buka [github.com/new](https://github.com/new).
-2. Buat repositori baru (misal: `portfolio` atau `revidyaa.github.io`).
-3. Pilih opsi **Public**.
-
-### Langkah 2: Hubungkan & Push Proyek ke GitHub
-Buka terminal pada direktori proyek ini dan jalankan perintah berikut:
-
+### Prasyarat
+Pastikan Anda telah menginstal **Node.js** dan **Firebase CLI**:
 ```bash
-# Inisialisasi git (jika belum)
-git init
-
-# Tambahkan semua file
-git add .
-
-# Buat commit pertama
-git commit -m "Deploy Revidya Aprilla Sandiva portfolio to GitHub Pages"
-
-# Ganti branch ke main
-git branch -M main
-
-# Hubungkan ke repository GitHub Anda (ganti URL dengan repo Anda)
-git remote add origin https://github.com/<USERNAME-ANDA>/<NAMA-REPO-ANDA>.git
-
-# Push ke GitHub
-git push -u origin main
+# Instal Firebase CLI secara global (jika belum ada)
+npm install -g firebase-tools
 ```
 
-### Langkah 3: Aktifkan GitHub Pages via GitHub Actions
-1. Di halaman repositori GitHub Anda, klik tab **Settings** (Pengaturan).
-2. Di bilah sisi kiri, klik **Pages**.
-3. Pada bagian **Build and deployment**:
-   - Di bawah **Source**, pilih opsi: **GitHub Actions**.
-4. Selesai! GitHub Actions akan secara otomatis menjalankan workflow `.github/workflows/deploy.yml`, melakukan build, dan mempublikasikan website Anda.
-5. URL website Anda akan muncul di halaman tersebut:  
-   `https://<username>.github.io/<nama-repo>/`
+---
+
+### Langkah 1: Login ke Firebase
+Jalankan perintah ini di terminal untuk menghubungkan akun Google Anda:
+```bash
+firebase login
+```
+
+---
+
+### Langkah 2: Hubungkan Project Firebase (Inisialisasi)
+Jika Anda sudah membuat project di [Firebase Console](https://console.firebase.google.com/):
+
+```bash
+# Pilih atau tambahkan project Firebase Anda
+firebase use --add
+```
+*(Pilih project Firebase yang sudah Anda buat, lalu beri alias `default`)*
+
+> **Catatan**: Berkas konfigurasi `firebase.json` dan `.firebaserc` sudah otomatis disiapkan di repositori ini dan siap pakai.
+
+---
+
+### Langkah 3: Build & Deploy
+Jalankan perintah build dan deploy langsung dengan satu perintah:
+
+```bash
+# 1. Menggunakan npm script yang telah disiapkan:
+npm run deploy:firebase
+
+# ATAU jalankan perintah manual:
+npm run build
+firebase deploy --only hosting
+```
+
+Setelah proses selesai, URL website Anda akan langsung aktif di:
+👉 `https://<project-id>.web.app`  
+👉 `https://<project-id>.firebaseapp.com`
+
+---
+
+## 🤖 Otomasi Deploy via GitHub Actions (Opsional)
+Jika Anda ingin website otomatis ter-deploy setiap kali melakukan `git push` ke GitHub:
+1. Jalankan perintah otomatis Firebase:
+   ```bash
+   firebase init hosting:github
+   ```
+2. Ikuti instruksi di terminal untuk menghubungkan repositori GitHub Anda.
+3. Workflow `.github/workflows/firebase-hosting.yml` sudah siap digunakan.
 
 ---
 
@@ -56,10 +76,10 @@ npm install
 # 2. Jalankan server lokal
 npm run dev
 
-# 3. Build untuk produksi
+# 3. Test build produksi
 npm run build
 
-# 4. Pratinjau build produksi lokal
+# 4. Pratinjau lokal
 npm run preview
 ```
 
@@ -70,4 +90,5 @@ npm run preview
 - `public/Revidya_Aprilla_Sandiva_CV.pdf` — Berkas CV resmi
 - `public/Sertif/` — Dokumen PDF sertifikat (McKinsey, NVIDIA, IBM, MikroTik)
 - `public/images for document/` — Foto inspeksi conveyor belt dan grafik evaluasi mAP skripsi
-- `src/utils/assets.ts` — Helper resolver URL aset statis untuk kompatibilitas GitHub Pages
+- `firebase.json` — Konfigurasi rewrite SPA & header caching Firebase Hosting
+- `.firebaserc` — Konfigurasi target project Firebase

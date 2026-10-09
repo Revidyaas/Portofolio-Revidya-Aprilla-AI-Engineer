@@ -3,11 +3,10 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig } from 'vite';
 
-export default defineConfig(({ command }) => {
+export default defineConfig(() => {
   return {
-    // In production build (GitHub Pages), use repository subpath.
-    // In development server (AI Studio preview on port 3000), use '/' so localhost:3000 loads immediately.
-    base: command === 'build' ? '/Portofolio-Revidya-Aprilla-AI-Engineer/' : '/',
+    // Firebase Hosting serves the application from the root domain ('/')
+    base: '/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
